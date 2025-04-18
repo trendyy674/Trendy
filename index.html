@@ -2,288 +2,132 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mini Insta Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instagram Profile</title>
   <style>
-    :root {
-      --bg: #121212;
-      --text: #ffffff;
-      --accent: #ff4d94;
-      --ring: linear-gradient(45deg, #ff4d94, #ffb347);
-    }
-
-    [data-theme="light"] {
-      --bg: #f4f4f4;
-      --text: #000;
-      --accent: #e60073;
-      --ring: linear-gradient(45deg, #e60073, #ffc371);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
     body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
       display: flex;
       flex-direction: column;
       align-items: center;
+      padding: 20px;
     }
-
-    .theme-toggle {
-      position: fixed;
-      top: 15px;
-      right: 20px;
-      background: var(--accent);
-      border: none;
-      padding: 8px 14px;
-      border-radius: 8px;
-      color: #fff;
-      cursor: pointer;
-    }
-
     .profile {
-      margin-top: 60px;
       text-align: center;
+      margin-bottom: 20px;
     }
-
-    .story-ring {
-      border-radius: 50%;
-      padding: 5px;
+    .profile img {
       width: 120px;
       height: 120px;
-      background: var(--ring);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-    }
-
-    .story-ring img {
       border-radius: 50%;
-      width: 100%;
-      height: 100%;
       object-fit: cover;
-      border: 3px solid var(--bg);
     }
-
-    h1 {
-      margin: 10px 0 5px;
-    }
-
-    .bio {
-      color: #aaa;
-      font-size: 0.9rem;
-      max-width: 300px;
-      margin: auto;
-    }
-
-    .stats {
-      margin: 15px 0;
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-    }
-
-    .stats div {
-      font-size: 0.9rem;
-      color: #ccc;
-    }
-
-    .actions {
+    .upload-btn {
       margin-top: 10px;
-    }
-
-    .actions button {
-      background: var(--accent);
+      padding: 10px 20px;
+      background-color: #007bff;
       color: white;
       border: none;
-      padding: 10px 20px;
-      margin: 5px;
-      border-radius: 8px;
+      border-radius: 5px;
       cursor: pointer;
-      font-weight: bold;
     }
-
-    .post-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 10px;
-      padding: 20px;
-      max-width: 800px;
-      width: 100%;
-    }
-
-    .post {
-      position: relative;
-    }
-
-    .post img {
-      width: 100%;
-      height: 140px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-
-    .caption {
-      position: absolute;
-      bottom: 0;
-      background: rgba(0,0,0,0.5);
-      width: 100%;
-      padding: 4px 8px;
-      font-size: 0.75rem;
-      color: white;
-      border-radius: 0 0 8px 8px;
-    }
-
-    input[type="file"], input[type="text"] {
-      display: none;
-    }
-
-    .story-popup {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: var(--bg);
-      border: 2px solid var(--accent);
-      padding: 20px;
-      border-radius: 10px;
-      z-index: 100;
-    }
-
-    .story-popup img {
-      max-width: 300px;
-      border-radius: 10px;
-    }
-
-    .overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100vw; height: 100vh;
-      background: rgba(0,0,0,0.5);
-      z-index: 99;
+    .upload-btn:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
 
-  <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
-
   <div class="profile">
-    <div class="story-ring" onclick="openStoryPopup()">
-      <img id="profilePic" src="https://via.placeholder.com/120" alt="01887761712-e1.jpg">
-    </div>
-    <h1>@your_username</h1>
-    <p class="bio">Creative soul. Sharing moments. Living life.</p>
-    <div class="stats">
-      <div><strong id="followers">120</strong> Followers</div>
-      <div><strong id="following">180</strong> Following</div>
-    </div>
-    <div class="actions">
-      <label>
-        <button>Add Post</button>
-        <input type="file" accept="image/*" onchange="uploadPost(event)">
-        <input type="text" id="captionInput" placeholder="Add a caption...">
-      </label>
-      <label>
-        <button>Update Story</button>
-        <input type="file" accept="image/*" onchange="uploadStory(event)">
-      </label>
-    </div>
+    <h2>@username</h2>
+    <img id="profilePic" src="https://via.placeholder.com/120" alt="Profile Picture" />
+    <input type="file" id="storyInput" style="display: none" />
+    <button class="upload-btn" onclick="document.getElementById('storyInput').click()">Update Story</button>
   </div>
 
-  <div class="post-grid" id="postGrid"></div>
-
-  <!-- Story Popup -->
-  <div class="overlay" onclick="closeStoryPopup()"></div>
-  <div class="story-popup" id="storyPopup">
-    <img id="storyImage" src="" alt="Story">
+  <div class="post">
+    <input type="file" id="postInput" />
+    <input type="text" id="captionInput" placeholder="Enter caption" />
+    <button class="upload-btn" onclick="uploadPost()">Upload Post</button>
   </div>
 
   <script>
-    // Theme toggle
-    function toggleTheme() {
-      const currentTheme = document.documentElement.getAttribute('data-theme');
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-    }
+    const token = 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;
+    const repoOwner = trendyy674;
+    const repoName = 'insta-profile-data';
 
-    // Load theme from storage
-    (function() {
-      const saved = localStorage.getItem('theme');
-      if (saved) document.documentElement.setAttribute('data-theme', saved);
-      loadPosts();
-      loadStory();
-    })();
-
-    // Upload story
-    function uploadStory(event) {
+    // Function to upload story image to GitHub
+    document.getElementById('storyInput').addEventListener('change', function(event) {
       const file = event.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const imgSrc = e.target.result;
-        document.getElementById('profilePic').src = imgSrc;
-        localStorage.setItem('story', imgSrc);
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const base64Image = e.target.result.split(',')[1];
+          const path = `story/${file.name}`;
+          const message = `Update story image: ${file.name}`;
+          uploadFileToGitHub(path, base64Image, message);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Function to upload post image and caption to GitHub
+    function uploadPost() {
+      const postInput = document.getElementById('postInput');
+      const captionInput = document.getElementById('captionInput');
+      const file = postInput.files[0];
+      const caption = captionInput.value;
+
+      if (file && caption) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const base64Image = e.target.result.split(',')[1];
+          const path = `posts/${file.name}`;
+          const message = `Add new post: ${caption}`;
+          uploadFileToGitHub(path, base64Image, message);
+        };
+        reader.readAsDataURL(file);
+      } else {
+        alert('Please select a file and enter a caption.');
+      }
+    }
+
+    // Function to upload file to GitHub repository
+    function uploadFileToGitHub(path, content, message) {
+      const url = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`;
+      const data = {
+        message: message,
+        content: content,
+        committer: {
+          name: 'Your Name',
+          email: 'your-email@example.com'
+        }
       };
-      reader.readAsDataURL(file);
-    }
 
-    function loadStory() {
-      const saved = localStorage.getItem('story');
-      if (saved) document.getElementById('profilePic').src = saved;
-    }
-
-    // Upload post
-    function uploadPost(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-
-      const caption = prompt("Enter a caption for your post:");
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        const post = { img: e.target.result, caption };
-        const posts = JSON.parse(localStorage.getItem('posts') || '[]');
-        posts.unshift(post);
-        localStorage.setItem('posts', JSON.stringify(posts));
-        renderPost(post);
-      };
-      reader.readAsDataURL(file);
-    }
-
-    function loadPosts() {
-      const posts = JSON.parse(localStorage.getItem('posts') || '[]');
-      posts.forEach(renderPost);
-    }
-
-    function renderPost(post) {
-      const postDiv = document.createElement('div');
-      postDiv.className = 'post';
-      postDiv.innerHTML = `
-        <img src="${post.img}" alt="Post">
-        <div class="caption">${post.caption || ''}</div>
-      `;
-      document.getElementById('postGrid').prepend(postDiv);
-    }
-
-    // Story popup
-    function openStoryPopup() {
-      const src = document.getElementById('profilePic').src;
-      document.getElementById('storyImage').src = src;
-      document.querySelector('.overlay').style.display = 'block';
-      document.getElementById('storyPopup').style.display = 'block';
-    }
-
-    function closeStoryPopup() {
-      document.querySelector('.overlay').style.display = 'none';
-      document.getElementById('storyPopup').style.display = 'none';
+      fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.content) {
+          alert('Upload successful!');
+          if (path.startsWith('story/')) {
+            document.getElementById('profilePic').src = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/main/${path}`;
+          }
+        } else {
+          alert('Error uploading file.');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Error uploading file.');
+      });
     }
   </script>
 
