@@ -3,143 +3,287 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Self-Intro Page</title>
+  <title>Mini Insta Profile</title>
   <style>
+    :root {
+      --bg: #121212;
+      --text: #ffffff;
+      --accent: #ff4d94;
+      --ring: linear-gradient(45deg, #ff4d94, #ffb347);
+    }
+
+    [data-theme="light"] {
+      --bg: #f4f4f4;
+      --text: #000;
+      --accent: #e60073;
+      --ring: linear-gradient(45deg, #e60073, #ffc371);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
       margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      min-height: 100vh;
-      color: white;
     }
 
-    .container {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      backdrop-filter: blur(10px);
-      padding: 40px;
-      max-width: 600px;
-      width: 90%;
-      box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+    .theme-toggle {
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      background: var(--accent);
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .profile {
+      margin-top: 60px;
       text-align: center;
-      animation: fadeIn 1.2s ease-in;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .story-ring {
+      border-radius: 50%;
+      padding: 5px;
+      width: 120px;
+      height: 120px;
+      background: var(--ring);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .story-ring img {
+      border-radius: 50%;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border: 3px solid var(--bg);
     }
 
     h1 {
-      font-size: 2.5rem;
-      color: #ffffff;
-      text-shadow: 0 0 10px #00ffff;
-      margin-bottom: 10px;
+      margin: 10px 0 5px;
     }
 
     .bio {
-      color: #ddd;
-      font-size: 1.1rem;
-      margin-bottom: 30px;
+      color: #aaa;
+      font-size: 0.9rem;
+      max-width: 300px;
+      margin: auto;
     }
 
-    .status-box {
-      margin-top: 20px;
-      text-align: left;
+    .stats {
+      margin: 15px 0;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
     }
 
-    .status {
-      background: rgba(0, 153, 255, 0.2);
-      border-left: 5px solid #00ccff;
-      padding: 12px;
-      margin-bottom: 12px;
-      border-radius: 8px;
-      animation: fadeIn 0.5s ease;
-    }
-
-    input, button {
-      padding: 12px;
-      border-radius: 8px;
-      border: none;
-      font-size: 1rem;
-      margin-top: 10px;
-    }
-
-    input {
-      width: 100%;
-      background: rgba(255, 255, 255, 0.15);
-      color: white;
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-
-    input::placeholder {
+    .stats div {
+      font-size: 0.9rem;
       color: #ccc;
     }
 
-    button {
-      width: 50%;
-      background: #00ccff;
-      color: #000;
-      font-weight: bold;
+    .actions {
+      margin-top: 10px;
+    }
+
+    .actions button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      font-weight: bold;
     }
 
-    button:hover {
-      background: #00e1ff;
-      transform: scale(1.05);
+    .post-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 10px;
+      padding: 20px;
+      max-width: 800px;
+      width: 100%;
     }
 
-    #storyArea {
-      max-height: 250px;
-      overflow-y: auto;
-      padding-right: 10px;
+    .post {
+      position: relative;
     }
 
-    /* Scrollbar for status area */
-    #storyArea::-webkit-scrollbar {
-      width: 6px;
+    .post img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 8px;
     }
 
-    #storyArea::-webkit-scrollbar-thumb {
-      background-color: rgba(255, 255, 255, 0.3);
+    .caption {
+      position: absolute;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      width: 100%;
+      padding: 4px 8px;
+      font-size: 0.75rem;
+      color: white;
+      border-radius: 0 0 8px 8px;
+    }
+
+    input[type="file"], input[type="text"] {
+      display: none;
+    }
+
+    .story-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--bg);
+      border: 2px solid var(--accent);
+      padding: 20px;
       border-radius: 10px;
+      z-index: 100;
+    }
+
+    .story-popup img {
+      max-width: 300px;
+      border-radius: 10px;
+    }
+
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.5);
+      z-index: 99;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <h1>Hello, I'm Alex!</h1>
-    <p class="bio">Creative web developer & tech enthusiast. Welcome to my corner of the web!</p>
+  <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
 
-    <div class="status-box">
-      <h2>Latest Updates:</h2>
-      <div id="storyArea"></div>
-
-      <input type="text" id="statusInput" placeholder="What's on your mind?" />
-      <button onclick="addStatus()">Post Update</button>
+  <div class="profile">
+    <div class="story-ring" onclick="openStoryPopup()">
+      <img id="profilePic" src="https://via.placeholder.com/120" alt="Story">
+    </div>
+    <h1>@your_username</h1>
+    <p class="bio">Creative soul. Sharing moments. Living life.</p>
+    <div class="stats">
+      <div><strong id="followers">120</strong> Followers</div>
+      <div><strong id="following">180</strong> Following</div>
+    </div>
+    <div class="actions">
+      <label>
+        <button>Add Post</button>
+        <input type="file" accept="image/*" onchange="uploadPost(event)">
+        <input type="text" id="captionInput" placeholder="Add a caption...">
+      </label>
+      <label>
+        <button>Update Story</button>
+        <input type="file" accept="image/*" onchange="uploadStory(event)">
+      </label>
     </div>
   </div>
 
+  <div class="post-grid" id="postGrid"></div>
+
+  <!-- Story Popup -->
+  <div class="overlay" onclick="closeStoryPopup()"></div>
+  <div class="story-popup" id="storyPopup">
+    <img id="storyImage" src="" alt="Story">
+  </div>
+
   <script>
-    function addStatus() {
-      const input = document.getElementById('statusInput');
-      const storyArea = document.getElementById('storyArea');
-      if (input.value.trim() !== '') {
-        const newStatus = document.createElement('div');
-        newStatus.className = 'status';
-        const now = new Date();
-        newStatus.innerHTML = `<strong>${now.toLocaleString()}</strong><br>${input.value}`;
-        newStatus.style.opacity = 0;
-        storyArea.prepend(newStatus);
-        setTimeout(() => newStatus.style.opacity = 1, 10);
-        input.value = '';
-      }
+    // Theme toggle
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+    }
+
+    // Load theme from storage
+    (function() {
+      const saved = localStorage.getItem('theme');
+      if (saved) document.documentElement.setAttribute('data-theme', saved);
+      loadPosts();
+      loadStory();
+    })();
+
+    // Upload story
+    function uploadStory(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const imgSrc = e.target.result;
+        document.getElementById('profilePic').src = imgSrc;
+        localStorage.setItem('story', imgSrc);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function loadStory() {
+      const saved = localStorage.getItem('story');
+      if (saved) document.getElementById('profilePic').src = saved;
+    }
+
+    // Upload post
+    function uploadPost(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const caption = prompt("Enter a caption for your post:");
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const post = { img: e.target.result, caption };
+        const posts = JSON.parse(localStorage.getItem('posts') || '[]');
+        posts.unshift(post);
+        localStorage.setItem('posts', JSON.stringify(posts));
+        renderPost(post);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function loadPosts() {
+      const posts = JSON.parse(localStorage.getItem('posts') || '[]');
+      posts.forEach(renderPost);
+    }
+
+    function renderPost(post) {
+      const postDiv = document.createElement('div');
+      postDiv.className = 'post';
+      postDiv.innerHTML = `
+        <img src="${post.img}" alt="Post">
+        <div class="caption">${post.caption || ''}</div>
+      `;
+      document.getElementById('postGrid').prepend(postDiv);
+    }
+
+    // Story popup
+    function openStoryPopup() {
+      const src = document.getElementById('profilePic').src;
+      document.getElementById('storyImage').src = src;
+      document.querySelector('.overlay').style.display = 'block';
+      document.getElementById('storyPopup').style.display = 'block';
+    }
+
+    function closeStoryPopup() {
+      document.querySelector('.overlay').style.display = 'none';
+      document.getElementById('storyPopup').style.display = 'none';
     }
   </script>
 
