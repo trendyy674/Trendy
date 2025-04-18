@@ -1,106 +1,147 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Resume</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Self-Intro Page</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: white;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      max-width: 600px;
+      width: 90%;
+      box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+      text-align: center;
+      animation: fadeIn 1.2s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #ffffff;
+      text-shadow: 0 0 10px #00ffff;
+      margin-bottom: 10px;
+    }
+
+    .bio {
+      color: #ddd;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+
+    .status-box {
+      margin-top: 20px;
+      text-align: left;
+    }
+
+    .status {
+      background: rgba(0, 153, 255, 0.2);
+      border-left: 5px solid #00ccff;
+      padding: 12px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      animation: fadeIn 0.5s ease;
+    }
+
+    input, button {
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+
+    input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    input::placeholder {
+      color: #ccc;
+    }
+
+    button {
+      width: 50%;
+      background: #00ccff;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #00e1ff;
+      transform: scale(1.05);
+    }
+
+    #storyArea {
+      max-height: 250px;
+      overflow-y: auto;
+      padding-right: 10px;
+    }
+
+    /* Scrollbar for status area */
+    #storyArea::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    #storyArea::-webkit-scrollbar-thumb {
+      background-color: rgba(255, 255, 255, 0.3);
+      border-radius: 10px;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav>
-        <div class="container">
-            <a href="#home" class="logo">Your Name</a>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+  <div class="container">
+    <h1>Hello, I'm Alex!</h1>
+    <p class="bio">Creative web developer & tech enthusiast. Welcome to my corner of the web!</p>
 
-    <!-- Home Section -->
-    <section id="home">
-        <div class="container">
-            <h1>Hello, I'm <span>Your Name</span></h1>
-            <p>Web Developer | Designer | Problem Solver</p>
-        </div>
-    </section>
+    <div class="status-box">
+      <h2>Latest Updates:</h2>
+      <div id="storyArea"></div>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <h2>About Me</h2>
-            <p>I am a passionate web developer with experience in building responsive and interactive websites. I am always eager to learn new technologies and improve my skills. When I am not coding, I enjoy reading and traveling.</p>
-        </div>
-    </section>
+      <input type="text" id="statusInput" placeholder="What's on your mind?" />
+      <button onclick="addStatus()">Post Update</button>
+    </div>
+  </div>
 
-    <!-- Experience Section -->
-    <section id="experience">
-        <div class="container">
-            <h2>Work Experience</h2>
-            <div class="experience-item">
-                <h3>Web Developer at XYZ Corp</h3>
-                <p><strong>Jan 2020 - Present</strong></p>
-                <ul>
-                    <li>Developed and maintained company website using HTML, CSS, and JavaScript.</li>
-                    <li>Worked with a team to integrate APIs and enhance user experience.</li>
-                    <li>Improved page loading times by optimizing front-end code.</li>
-                </ul>
-            </div>
-            <div class="experience-item">
-                <h3>Junior Developer at ABC Ltd</h3>
-                <p><strong>Jun 2018 - Dec 2019</strong></p>
-                <ul>
-                    <li>Assisted in creating web applications using React.js and Node.js.</li>
-                    <li>Collaborated with senior developers to write clean and efficient code.</li>
-                    <li>Participated in code reviews and unit testing.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills">
-        <div class="container">
-            <h2>Skills</h2>
-            <div class="skills-list">
-                <div class="skill">
-                    <h3>HTML/CSS</h3>
-                </div>
-                <div class="skill">
-                    <h3>JavaScript</h3>
-                </div>
-                <div class="skill">
-                    <h3>React.js</h3>
-                </div>
-                <div class="skill">
-                    <h3>Node.js</h3>
-                </div>
-                <div class="skill">
-                    <h3>Git/GitHub</h3>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
-            <h2>Contact</h2>
-            <p>If you'd like to get in touch, feel free to reach out!</p>
-            <a href="mailto:your.email@example.com" class="contact-btn">Email Me</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Your Name. All rights reserved.</p>
-        </div>
-    </footer>
+  <script>
+    function addStatus() {
+      const input = document.getElementById('statusInput');
+      const storyArea = document.getElementById('storyArea');
+      if (input.value.trim() !== '') {
+        const newStatus = document.createElement('div');
+        newStatus.className = 'status';
+        const now = new Date();
+        newStatus.innerHTML = `<strong>${now.toLocaleString()}</strong><br>${input.value}`;
+        newStatus.style.opacity = 0;
+        storyArea.prepend(newStatus);
+        setTimeout(() => newStatus.style.opacity = 1, 10);
+        input.value = '';
+      }
+    }
+  </script>
 
 </body>
 </html>
