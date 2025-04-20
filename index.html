@@ -1,143 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Instagram Profile</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-    }
-    .profile {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .profile img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-    .upload-btn {
-      margin-top: 10px;
-      padding: 10px 20px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .upload-btn:hover {
-      background-color: #0056b3;
-    }
-    .post {
-      margin-top: 20px;
-      text-align: center;
-    }
-    .post input {
-      margin: 5px 0;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Resume</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-  <div class="profile">
-    <h2>@username</h2>
-    <img id="profilePic" src="https://via.placeholder.com/120" alt="Profile Picture" />
-    <input type="file" id="storyInput" style="display: none" />
-    <button class="upload-btn" onclick="document.getElementById('storyInput').click()">Update Story</button>
-  </div>
-
-  <div class="post">
-    <input type="file" id="postInput" />
-    <input type="text" id="captionInput" placeholder="Enter caption" />
-    <button class="upload-btn" onclick="uploadPost()">Upload Post</button>
-  </div>
-
-  <script>
-    // Replace with your GitHub token and repo information
-    const token = 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;
-    const repoOwner = trendyy674;
-    const repoName = insta-profile-data;
-
-    // Function to upload story image to GitHub
-    document.getElementById('storyInput').addEventListener('change', function(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          const base64Image = e.target.result.split(',')[1];
-          const path = `story/${file.name}`;
-          const message = `Update story image: ${file.name}`;
-          uploadFileToGitHub(path, base64Image, message);
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-
-    // Function to upload post image and caption to GitHub
-    function uploadPost() {
-      const postInput = document.getElementById('postInput');
-      const captionInput = document.getElementById('captionInput');
-      const file = postInput.files[0];
-      const caption = captionInput.value;
-
-      if (file && caption) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          const base64Image = e.target.result.split(',')[1];
-          const path = `posts/${file.name}`;
-          const message = `Add new post: ${caption}`;
-          uploadFileToGitHub(path, base64Image, message);
-        };
-        reader.readAsDataURL(file);
-      } else {
-        alert('Please select a file and enter a caption.');
-      }
-    }
-
-    // Function to upload file to GitHub repository
-    function uploadFileToGitHub(path, content, message) {
-      const url = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${path}`;
-      const data = {
-        message: message,
-        content: content,
-        committer: {
-          name: 'Your Name',
-          email: 'your-email@example.com'
-        }
-      };
-
-      fetch(url, {
-        method: 'PUT',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.content) {
-          alert('Upload successful!');
-          if (path.startsWith('story/')) {
-            document.getElementById('profilePic').src = `https://raw.githubusercontent.com/${repoOwner}/${repoName}/main/${path}`;
-          }
-        } else {
-          alert('Error uploading file.');
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert('Error uploading file.');
-      });
-    }
-  </script>
-
+    <div class="resume-container">
+        <header>
+            <div class="profile-img">
+                <img src="https://via.placeholder.com/150" alt="Profile Photo">
+            </div>
+            <h1>John Doe</h1>
+            <p>Full Stack Developer</p>
+        </header>
+        <section class="skills">
+            <h2>Skills</h2>
+            <div class="skill-icons">
+                <div class="skill">
+                    <img src="https://via.placeholder.com/50" alt="HTML">
+                    <p>HTML</p>
+                </div>
+                <div class="skill">
+                    <img src="https://via.placeholder.com/50" alt="CSS">
+                    <p>CSS</p>
+                </div>
+                <div class="skill">
+                    <img src="https://via.placeholder.com/50" alt="JavaScript">
+                    <p>JavaScript</p>
+                </div>
+                <div class="skill">
+                    <img src="https://via.placeholder.com/50" alt="React">
+                    <p>React</p>
+                </div>
+                <div class="skill">
+                    <img src="https://via.placeholder.com/50" alt="Node.js">
+                    <p>Node.js</p>
+                </div>
+            </div>
+        </section>
+        <section class="experience">
+            <h2>Experience</h2>
+            <div class="job">
+                <h3>Software Engineer</h3>
+                <p>XYZ Corp | 2022 - Present</p>
+                <ul>
+                    <li>Developed and maintained web applications using React and Node.js.</li>
+                    <li>Collaborated with cross-functional teams to deliver high-quality software solutions.</li>
+                </ul>
+            </div>
+            <div class="job">
+                <h3>Junior Developer</h3>
+                <p>ABC Ltd | 2020 - 2022</p>
+                <ul>
+                    <li>Assisted in the development of client-side applications using JavaScript and CSS.</li>
+                    <li>Participated in code reviews and contributed to team knowledge sharing.</li>
+                </ul>
+            </div>
+        </section>
+        <section class="education">
+            <h2>Education</h2>
+            <p>Bachelor of Science in Computer Science</p>
+            <p>University of Technology | 2016 - 2020</p>
+        </section>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
