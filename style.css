@@ -1,102 +1,65 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
+  margin: 0;
+  background: linear-gradient(to right, #1f1c2c, #928dab);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.resume-container {
-    max-width: 900px;
-    margin: 20px auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.container {
+  perspective: 1000px;
 }
 
-header {
-    text-align: center;
-    margin-bottom: 20px;
+.card {
+  width: 300px;
+  height: 400px;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  cursor: pointer;
 }
 
-.profile-img img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    border: 5px solid #007BFF;
-    margin-bottom: 10px;
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
 }
 
-h1 {
-    font-size: 2.5rem;
-    color: #007BFF;
+.card:hover .card-inner {
+  transform: rotateY(180deg);
 }
 
-p {
-    font-size: 1.2rem;
-    color: #555;
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  color: white;
+  border-radius: 15px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-.skills, .experience, .education {
-    margin-bottom: 20px;
+.card-front {
+  background: #2a2a72;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-h2 {
-    font-size: 2rem;
-    color: #007BFF;
-    margin-bottom: 10px;
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid white;
+  margin-bottom: 20px;
 }
 
-.skill-icons {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.skill {
-    text-align: center;
-    margin: 10px;
-}
-
-.skill img {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 5px;
-}
-
-.job {
-    margin-bottom: 15px;
-}
-
-.job h3 {
-    font-size: 1.5rem;
-    color: #333;
-}
-
-.job p {
-    font-size: 1.1rem;
-    color: #555;
-}
-
-.job ul {
-    list-style-type: none;
-    padding-left: 20px;
-}
-
-.job ul li {
-    font-size: 1rem;
-    color: #555;
-}
-
-@media (max-width: 768px) {
-    .skill-icons {
-        flex-direction: column;
-        align-items: center;
-    }
+.card-back {
+  background: #1e1e2f;
+  transform: rotateY(180deg);
 }
