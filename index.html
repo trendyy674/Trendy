@@ -1,70 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Resume</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>3D Resume</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div class="resume-container">
-        <header>
-            <div class="profile-img">
-                <img src="https://via.placeholder.com/150" alt="Profile Photo">
-            </div>
-            <h1>John Doe</h1>
-            <p>Full Stack Developer</p>
-        </header>
-        <section class="skills">
-            <h2>Skills</h2>
-            <div class="skill-icons">
-                <div class="skill">
-                    <img src="https://via.placeholder.com/50" alt="HTML">
-                    <p>HTML</p>
-                </div>
-                <div class="skill">
-                    <img src="https://via.placeholder.com/50" alt="CSS">
-                    <p>CSS</p>
-                </div>
-                <div class="skill">
-                    <img src="https://via.placeholder.com/50" alt="JavaScript">
-                    <p>JavaScript</p>
-                </div>
-                <div class="skill">
-                    <img src="https://via.placeholder.com/50" alt="React">
-                    <p>React</p>
-                </div>
-                <div class="skill">
-                    <img src="https://via.placeholder.com/50" alt="Node.js">
-                    <p>Node.js</p>
-                </div>
-            </div>
-        </section>
-        <section class="experience">
-            <h2>Experience</h2>
-            <div class="job">
-                <h3>Software Engineer</h3>
-                <p>XYZ Corp | 2022 - Present</p>
-                <ul>
-                    <li>Developed and maintained web applications using React and Node.js.</li>
-                    <li>Collaborated with cross-functional teams to deliver high-quality software solutions.</li>
-                </ul>
-            </div>
-            <div class="job">
-                <h3>Junior Developer</h3>
-                <p>ABC Ltd | 2020 - 2022</p>
-                <ul>
-                    <li>Assisted in the development of client-side applications using JavaScript and CSS.</li>
-                    <li>Participated in code reviews and contributed to team knowledge sharing.</li>
-                </ul>
-            </div>
-        </section>
-        <section class="education">
-            <h2>Education</h2>
-            <p>Bachelor of Science in Computer Science</p>
-            <p>University of Technology | 2016 - 2020</p>
-        </section>
+  <div class="container">
+    <div class="card" id="card">
+      <div class="card-inner">
+        <div class="card-front">
+          <img src="your-photo.jpg" alt="Your Name" class="profile-pic"/>
+          <h1>Your Name</h1>
+          <p>Full Stack Developer</p>
+        </div>
+        <div class="card-back">
+          <h2>About Me</h2>
+          <p>Brief intro about yourself, your skills, and passions.</p>
+          <h3>Skills</h3>
+          <ul>
+            <li>HTML / CSS / JavaScript</li>
+            <li>React / Node.js</li>
+            <li>Python / Django</li>
+            <li>UI/UX Design</li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <script src="script.js"></script>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
